@@ -1,0 +1,324 @@
+// Include Helpers
+@use "helpers/variables" as *;
+@use "helpers/mixins" as *;
+@use "helpers/fonts" as *;
+
+/* Styles */
+
+// Auth
+.auth-page {
+    height: 100vh;
+    text-align: center;
+    @include center;
+    .form-container {
+        max-width: 339px;
+        width: 100%;
+        > .title {
+            font-family: "blaka", "cairo-bold";
+            font-size: max(8vw, 5rem);
+            margin-bottom: 22px;
+        }
+        > form {
+            width: 100%;
+            @include flex(column, 5px);
+            > .input-container {
+                input {
+                    background-color: rgba(255, 255, 255, 20%);
+                    border: 0;
+                    padding: 10px;
+                    text-align: center;
+                    color: #fff;
+                    border-radius: 4px;
+                    &::placeholder {
+                        color: #FFF;
+                    }
+                    &[type='submit'] {
+                        background-color: rgba(255, 255, 255);
+                        color: $main-color;
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+        > a {
+            color: #fff;
+            text-decoration: underline;
+            margin-top: 3px;
+            display: inline-block;
+        }
+    }
+}
+
+// Toggle checkbox
+label.toggle {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    input {
+        width: 100%;
+        height: 100%;
+    }
+}
+.toggle__switch {
+    display: inline-block;
+    background: $back-main-color;
+    border-radius: 16px;
+    width: 58px;
+    height: 32px;
+    position: relative;
+    vertical-align: middle;
+    transition: background 0.25s;
+
+    &:before,
+    &:after {
+        content: '';
+    }
+
+    &:before {
+        display: block;
+        border-radius: 50%;
+        box-shadow: 0 0 0 1px rgba(0,0,0,0.25);
+        width: 24px;
+        height: 24px;
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        transition: left 0.25s;
+    }
+
+    &:not(.disabled):before {
+        background: linear-gradient(to bottom, #fff 0%,#eee 100%);
+    }
+
+    .toggle:hover &:not(.disabled):before {
+        background: linear-gradient(to bottom, #fff 0%,#fff 100%);
+    }
+
+    .toggle__checkbox:checked + & {
+        background: $third-color;
+        &:before {
+            left: 30px;
+        }
+    }
+
+    &.disabled {
+        background-color: rgba(0, 0, 0, 20%);
+        &:before {
+            background-color: rgb(202 202 202 / 67%);
+        }
+    }
+
+}
+.toggle__checkbox {
+    position: absolute;
+    visibility: hidden;
+}
+
+// Profile page
+.dashboard-container {
+    width: 100%;
+    height: calc(100vh - 60px);
+    .cover-container {
+        padding: 10px 0 35px 0;
+        overflow: auto;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        @include full;
+        > .info {
+            text-align: center;
+            max-width: 450px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 15px;
+            > .img {
+                $dim: 10vw;
+                $min: 150px;
+                width: max($dim, $min);
+                height: max($dim, $min);
+                border-radius: 50%;
+                overflow: hidden;
+                position: relative;
+                cursor: pointer;
+                &:hover {
+                    > .cover {
+                        background-color: rgba(0, 0, 0, 60%);
+                        > svg {
+                            opacity: 1;
+                        }
+                    }
+                }
+                img {
+                    border-radius: 50%;
+                    width: 100%;
+                    height: 100%;
+                }
+                > .cover {
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    cursor: pointer;
+                    @include full;
+                    @include center;
+                    transition: background-color ease-in-out 0.5s;
+                    > input {
+                        @include full;
+                        opacity: 0;
+                        cursor: pointer;
+                        position: absolute;
+                    }
+                    > svg {
+                        color: #fff;
+                        font-size: 35px;
+                        opacity: 0;
+                        transition: opacity ease-in-out 0.5s;
+                    }
+                }
+            }
+            > h2.name {
+                color: #FFF;
+                margin: 10px 0;
+            }
+            .options {
+                width: 100%;
+                @include flex($gap: 10px);
+                > .option {
+                    @include flex($gap: 8px);
+                    justify-content: center;
+                    flex: 1;
+                    height: 50px;
+                    align-items: center;
+                    background-color: $back-main-color;
+                    color: #FFF;
+                    border-radius: 70px;
+                }
+            }
+            .url-container {
+                margin: 10px 0;
+                overflow: hidden;
+                display: flex;
+                gap: 5px;
+                width: 100%;
+                height: 50px;
+                background-color: $back-main-color;
+                color: #FFF;
+                border-radius: 70px;
+                > .icon {
+                    width: 50px;
+                    background-color: $third-color;
+                    color: #fff;
+                    cursor: pointer;
+                    @include center;
+                }
+                > .url {
+                    padding-left: 10px;
+                    align-self: center;
+                    flex: 1;
+                    overflow: hidden;
+                    direction: ltr;
+                }
+            }
+            form.switches {
+                width: 100%;
+                @include flex(column, 10px);
+                > .switcher {
+                    display: flex;
+                    justify-content: space-between;
+                    > span.title {
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Messages
+.dashboard-container {
+    .info.msg {
+        display: block !important;
+        text-align: right;
+        margin-top: 15px;
+        max-width: 800px !important;
+        width: 100%;
+        padding: 0 10px;
+        > .title {
+            text-align: right;
+            color: #fff;
+            margin-bottom: 70px;
+        }
+        .messages {
+            @include flex(column, 100px);
+            > .message {
+                background-color: #FFF;
+                padding: 25px 20px 20px;
+                border-radius: 8px;
+                position: relative;
+                &:hover {
+                    > .icons {
+                        display: block;
+                    }
+                }
+                > .info {
+                    $right-img: 20px;
+                    @include flex(row, 10px);
+                    width: calc(100% - $right-img);
+                    position: absolute;
+                    top: -42px;
+                    right: $right-img;
+                    align-items: center;
+                    > .img {
+                        @include circle(65px);
+                        img {
+                            border: 2px solid #FFF;
+                            @include circle(65px);
+                        }
+                    }
+                    > .data {
+                        flex: 1;
+                        margin-top: -15px;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: flex-end;
+                        color: #FFF;
+                        font-size: max(1vw, 14px);
+                        > span.date {
+                            @include flex(row, 10px);
+                            align-items: center;
+                            > span {
+                                font-size: 14px;
+                            }
+                            span > svg {
+                                font-size: 20px;
+                                cursor: pointer;
+                                color: $color-danger;
+                            }
+                        }
+                    }
+                }
+                > p.msg {
+                    font-size: max(1vw, 14px);
+                    color: #777;
+                    line-height: 40px;
+                    word-spacing: 2px;
+                }
+                > .icons {
+                    position: absolute;
+                    display: none;
+                    left: 15px;
+                    bottom: 15px;
+                    > .delete {
+                        background-color: $color-danger;
+                        padding: 0 5px;
+                        color: #fff;
+                        border-radius: 3px;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+}

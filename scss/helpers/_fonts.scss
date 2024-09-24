@@ -1,0 +1,20 @@
+// Fonts
+$fonts: "./assets/fonts";
+$blaka: "BlakaInk-Regular.ttf";
+$cairo-bold: "Cairo-Bold.ttf";
+$cairo-regular: "Cairo-Regular.ttf";
+
+@font-face {
+    src: url("#{$fonts}/#{$blaka}") format('truetype');
+    font-family: "blaka";
+}
+
+@font-face {
+    src: url("#{$fonts}/#{$cairo-bold}");
+    font-family: "cairo-bold";
+}
+
+@font-face {
+    src: url("#{$fonts}/#{$cairo-regular}");
+    font-family: "cairo-regular";
+}
